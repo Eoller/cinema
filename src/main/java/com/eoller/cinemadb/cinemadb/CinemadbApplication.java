@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class CinemadbApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(CinemadbApplication.class, args);
     }
 
