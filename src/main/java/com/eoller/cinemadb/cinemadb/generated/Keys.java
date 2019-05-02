@@ -12,6 +12,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.Genre;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
+import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.Reservation;
 import com.eoller.cinemadb.cinemadb.generated.tables.Role;
 import com.eoller.cinemadb.cinemadb.generated.tables.Seat;
@@ -25,6 +26,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.records.GenreRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieHasGenreRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieShowRecord;
+import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieShowSeatRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.ReservationRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.RoleRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.SeatRecord;
@@ -33,6 +35,8 @@ import com.eoller.cinemadb.cinemadb.generated.tables.records.UserRoleRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
 
@@ -55,6 +59,7 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<MovieShowSeatRecord, Long> IDENTITY_MOVIE_SHOW_SEAT = Identities0.IDENTITY_MOVIE_SHOW_SEAT;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -68,6 +73,7 @@ public class Keys {
     public static final UniqueKey<MovieRecord> KEY_MOVIE_PRIMARY = UniqueKeys0.KEY_MOVIE_PRIMARY;
     public static final UniqueKey<MovieHasGenreRecord> KEY_MOVIE_HAS_GENRE_PRIMARY = UniqueKeys0.KEY_MOVIE_HAS_GENRE_PRIMARY;
     public static final UniqueKey<MovieShowRecord> KEY_MOVIE_SHOW_PRIMARY = UniqueKeys0.KEY_MOVIE_SHOW_PRIMARY;
+    public static final UniqueKey<MovieShowSeatRecord> KEY_MOVIE_SHOW_SEAT_PRIMARY = UniqueKeys0.KEY_MOVIE_SHOW_SEAT_PRIMARY;
     public static final UniqueKey<ReservationRecord> KEY_RESERVATION_PRIMARY = UniqueKeys0.KEY_RESERVATION_PRIMARY;
     public static final UniqueKey<RoleRecord> KEY_ROLE_PRIMARY = UniqueKeys0.KEY_ROLE_PRIMARY;
     public static final UniqueKey<SeatRecord> KEY_SEAT_PRIMARY = UniqueKeys0.KEY_SEAT_PRIMARY;
@@ -78,10 +84,17 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<MovieShowSeatRecord, MovieShowRecord> MOVIE_SHOW_FK = ForeignKeys0.MOVIE_SHOW_FK;
+    public static final ForeignKey<MovieShowSeatRecord, SeatRecord> SEAT_ID_FK = ForeignKeys0.SEAT_ID_FK;
+    public static final ForeignKey<ReservationRecord, MovieShowSeatRecord> MV_SH_SEAT_FK = ForeignKeys0.MV_SH_SEAT_FK;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
+
+    private static class Identities0 {
+        public static Identity<MovieShowSeatRecord, Long> IDENTITY_MOVIE_SHOW_SEAT = Internal.createIdentity(MovieShowSeat.MOVIE_SHOW_SEAT, MovieShowSeat.MOVIE_SHOW_SEAT.ID);
+    }
 
     private static class UniqueKeys0 {
         public static final UniqueKey<CinemaRecord> KEY_CINEMA_PRIMARY = Internal.createUniqueKey(Cinema.CINEMA, "KEY_cinema_PRIMARY", Cinema.CINEMA.ID);
@@ -92,10 +105,17 @@ public class Keys {
         public static final UniqueKey<MovieRecord> KEY_MOVIE_PRIMARY = Internal.createUniqueKey(Movie.MOVIE, "KEY_movie_PRIMARY", Movie.MOVIE.ID);
         public static final UniqueKey<MovieHasGenreRecord> KEY_MOVIE_HAS_GENRE_PRIMARY = Internal.createUniqueKey(MovieHasGenre.MOVIE_HAS_GENRE, "KEY_movie_has_genre_PRIMARY", MovieHasGenre.MOVIE_HAS_GENRE.ID);
         public static final UniqueKey<MovieShowRecord> KEY_MOVIE_SHOW_PRIMARY = Internal.createUniqueKey(MovieShow.MOVIE_SHOW, "KEY_movie_show_PRIMARY", MovieShow.MOVIE_SHOW.ID);
+        public static final UniqueKey<MovieShowSeatRecord> KEY_MOVIE_SHOW_SEAT_PRIMARY = Internal.createUniqueKey(MovieShowSeat.MOVIE_SHOW_SEAT, "KEY_movie_show_seat_PRIMARY", MovieShowSeat.MOVIE_SHOW_SEAT.ID);
         public static final UniqueKey<ReservationRecord> KEY_RESERVATION_PRIMARY = Internal.createUniqueKey(Reservation.RESERVATION, "KEY_reservation_PRIMARY", Reservation.RESERVATION.ID);
         public static final UniqueKey<RoleRecord> KEY_ROLE_PRIMARY = Internal.createUniqueKey(Role.ROLE, "KEY_role_PRIMARY", Role.ROLE.ID);
         public static final UniqueKey<SeatRecord> KEY_SEAT_PRIMARY = Internal.createUniqueKey(Seat.SEAT, "KEY_seat_PRIMARY", Seat.SEAT.ID);
         public static final UniqueKey<UserRecord> KEY_USER_PRIMARY = Internal.createUniqueKey(User.USER, "KEY_user_PRIMARY", User.USER.ID);
         public static final UniqueKey<UserRoleRecord> KEY_USER_ROLE_PRIMARY = Internal.createUniqueKey(UserRole.USER_ROLE, "KEY_user_role_PRIMARY", UserRole.USER_ROLE.ID);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<MovieShowSeatRecord, MovieShowRecord> MOVIE_SHOW_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_MOVIE_SHOW_PRIMARY, MovieShowSeat.MOVIE_SHOW_SEAT, "Movie_show_fk", MovieShowSeat.MOVIE_SHOW_SEAT.MOVIE_SHOW_ID);
+        public static final ForeignKey<MovieShowSeatRecord, SeatRecord> SEAT_ID_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_SEAT_PRIMARY, MovieShowSeat.MOVIE_SHOW_SEAT, "seat_id_fk", MovieShowSeat.MOVIE_SHOW_SEAT.SEAT_ID);
+        public static final ForeignKey<ReservationRecord, MovieShowSeatRecord> MV_SH_SEAT_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_MOVIE_SHOW_SEAT_PRIMARY, Reservation.RESERVATION, "mv_sh_seat_fk", Reservation.RESERVATION.MOVIE_SHW_SEAT_ID);
     }
 }

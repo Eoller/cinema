@@ -1,24 +1,19 @@
 package com.eoller.cinemadb.cinemadb.service;
 
-import com.eoller.cinemadb.cinemadb.domain.Country;
-import com.eoller.cinemadb.cinemadb.domain.Director;
+import com.eoller.cinemadb.cinemadb.domain.CinemaHall;
 import com.eoller.cinemadb.cinemadb.domain.Movie;
-import com.eoller.cinemadb.cinemadb.generated.tables.records.CountryRecord;
-import com.eoller.cinemadb.cinemadb.generated.tables.records.DirectorRecord;
-import com.eoller.cinemadb.cinemadb.mapper.Mappers;
-import com.eoller.cinemadb.cinemadb.repository.CountryRepository;
-import com.eoller.cinemadb.cinemadb.repository.DirectorRepository;
-import com.eoller.cinemadb.cinemadb.repository.MovieRepository;
-import org.apache.catalina.mapper.Mapper;
+import com.eoller.cinemadb.cinemadb.domain.MovieShow;
+import com.eoller.cinemadb.cinemadb.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
+@Transactional
 public class MovieService {
 
     @Autowired
@@ -30,14 +25,24 @@ public class MovieService {
     @Autowired
     private CountryRepository countryRepository;
 
+    @Autowired
+    private CinemaHallRepository cinemaHallRepository;
+
+    @Autowired
+    private MovieShowRepository movieShowRepository;
+
     public List<Movie> getAllMovies(){
-        Map<Long, Director> directors = directorRepository.getAll().stream()
-                .collect(Collectors.toMap(DirectorRecord::getId, s -> Mappers.map(s)));
-        Map<Long, Country> countries = countryRepository.getAll().stream()
-                .collect(Collectors.toMap(CountryRecord::getId, s -> Mappers.map(s)));
-        return movieRepository.getAll().stream().map(movieRecord -> Mappers
-                .map(movieRecord,countries.get(movieRecord.getCountryId()),directors.get(movieRecord.getDirectorId())))
-                .collect(Collectors.toList());
+        return movieRepository.getAll();
     }
+
+    public List<Movie> getMoviesByCinemaId(long cinemaId){
+        List<CinemaHall> cinemaHallsByCinemaId = cinemaHallRepository.getCinemaHallsByCinemaId(cinemaId);
+        List<MovieShow> movieShowsInTheseCinemaHalls = movieShowRepository
+                .getByCinemaHallIds(cinemaHallsByCinemaId.stream().map(CinemaHall::getId).collect(Collectors.toList()));
+        Set<Long> movieIds = movieShowsInTheseCinemaHalls.stream()
+                .map(movieShow -> movieShow.getMovie().getId()).collect(Collectors.toSet());
+        return movieRepository.getByIds(movieIds);
+    }
+
 
 }

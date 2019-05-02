@@ -13,6 +13,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.HibernateSequence;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
+import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.Reservation;
 import com.eoller.cinemadb.cinemadb.generated.tables.Role;
 import com.eoller.cinemadb.cinemadb.generated.tables.Seat;
@@ -43,7 +44,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cinemadbtest extends SchemaImpl {
 
-    private static final long serialVersionUID = -66296586;
+    private static final long serialVersionUID = -600647742;
 
     /**
      * The reference instance of <code>cinemaDBtest</code>
@@ -94,6 +95,11 @@ public class Cinemadbtest extends SchemaImpl {
      * The table <code>cinemaDBtest.movie_show</code>.
      */
     public final MovieShow MOVIE_SHOW = com.eoller.cinemadb.cinemadb.generated.tables.MovieShow.MOVIE_SHOW;
+
+    /**
+     * The table <code>cinemaDBtest.movie_show_seat</code>.
+     */
+    public final MovieShowSeat MOVIE_SHOW_SEAT = com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat.MOVIE_SHOW_SEAT;
 
     /**
      * The table <code>cinemaDBtest.reservation</code>.
@@ -154,6 +160,7 @@ public class Cinemadbtest extends SchemaImpl {
             Movie.MOVIE,
             MovieHasGenre.MOVIE_HAS_GENRE,
             MovieShow.MOVIE_SHOW,
+            MovieShowSeat.MOVIE_SHOW_SEAT,
             Reservation.RESERVATION,
             Role.ROLE,
             Seat.SEAT,

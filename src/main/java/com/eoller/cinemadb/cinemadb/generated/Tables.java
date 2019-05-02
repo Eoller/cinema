@@ -13,6 +13,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.HibernateSequence;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
+import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.Reservation;
 import com.eoller.cinemadb.cinemadb.generated.tables.Role;
 import com.eoller.cinemadb.cinemadb.generated.tables.Seat;
@@ -79,6 +80,11 @@ public class Tables {
      * The table <code>cinemaDBtest.movie_show</code>.
      */
     public static final MovieShow MOVIE_SHOW = com.eoller.cinemadb.cinemadb.generated.tables.MovieShow.MOVIE_SHOW;
+
+    /**
+     * The table <code>cinemaDBtest.movie_show_seat</code>.
+     */
+    public static final MovieShowSeat MOVIE_SHOW_SEAT = com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat.MOVIE_SHOW_SEAT;
 
     /**
      * The table <code>cinemaDBtest.reservation</code>.

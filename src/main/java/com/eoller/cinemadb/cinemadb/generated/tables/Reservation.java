@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Reservation extends TableImpl<ReservationRecord> {
 
-    private static final long serialVersionUID = 305493930;
+    private static final long serialVersionUID = 1720588848;
 
     /**
      * The reference instance of <code>cinemaDBtest.reservation</code>
@@ -66,19 +66,14 @@ public class Reservation extends TableImpl<ReservationRecord> {
     public final TableField<ReservationRecord, Boolean> PAYED = createField("payed", org.jooq.impl.SQLDataType.BIT, this, "");
 
     /**
-     * The column <code>cinemaDBtest.reservation.movie_show_id</code>.
-     */
-    public final TableField<ReservationRecord, Long> MOVIE_SHOW_ID = createField("movie_show_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>cinemaDBtest.reservation.seat_id</code>.
-     */
-    public final TableField<ReservationRecord, Long> SEAT_ID = createField("seat_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
-
-    /**
      * The column <code>cinemaDBtest.reservation.user_id</code>.
      */
     public final TableField<ReservationRecord, Long> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>cinemaDBtest.reservation.movie_shw_seat_id</code>.
+     */
+    public final TableField<ReservationRecord, Long> MOVIE_SHW_SEAT_ID = createField("movie_shw_seat_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
      * Create a <code>cinemaDBtest.reservation</code> table reference
@@ -126,7 +121,7 @@ public class Reservation extends TableImpl<ReservationRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.RESERVATION_FK8LD7QOR0RVJXH6TN2FBV7HG51, Indexes.RESERVATION_FKEWD3SOHJSPQF2SJJVDCMCEFPB, Indexes.RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG, Indexes.RESERVATION_PRIMARY);
+        return Arrays.<Index>asList(Indexes.RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG, Indexes.RESERVATION_MV_SH_SEAT_FK_IDX, Indexes.RESERVATION_PRIMARY);
     }
 
     /**
@@ -143,6 +138,18 @@ public class Reservation extends TableImpl<ReservationRecord> {
     @Override
     public List<UniqueKey<ReservationRecord>> getKeys() {
         return Arrays.<UniqueKey<ReservationRecord>>asList(Keys.KEY_RESERVATION_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<ReservationRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<ReservationRecord, ?>>asList(Keys.MV_SH_SEAT_FK);
+    }
+
+    public MovieShowSeat movieShowSeat() {
+        return new MovieShowSeat(this, Keys.MV_SH_SEAT_FK);
     }
 
     /**
