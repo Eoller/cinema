@@ -10,7 +10,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +31,10 @@ public class Test {
   private MovieShowService movieShowService;
 
   @org.junit.Test
-  public void contextLoads() {
-
-    List<MovieShow> allByCinemaIdAndDate = movieShowService.getAllByCinemaIdAndDate(6L, new Date(2019, 04, 30));
-
-    System.out.println("------");
+  public void contextLoads() throws ParseException {
+    SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+    Date date = df.parse("04302019");
+    List<MovieShow> allByCinemaIdAndDate = movieShowService.getAllByCinemaIdAndDate(6L, date);
+    System.out.println(new java.sql.Date(1556645910));
   }
 }

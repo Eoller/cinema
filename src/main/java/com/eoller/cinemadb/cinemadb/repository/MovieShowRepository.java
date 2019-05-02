@@ -6,10 +6,12 @@ import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieShowRecord;
 import com.eoller.cinemadb.cinemadb.mapper.MovieShowMapper;
 import org.jooq.DSLContext;
 import org.jooq.Result;
+import org.jooq.impl.DSL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,9 +46,9 @@ public class MovieShowRepository {
         return dslContext.selectFrom(MOVIE_SHOW).where(MOVIE_SHOW.ID.eq(id)).fetchOne(movieShowMapper::map);
     }
 
-    public List<MovieShow> getByCinemaHallIdsAndDate(List<Long> cinemaHallIds, Date date) {
+    public List<MovieShow> getByCinemaHallIdsAndDate(List<Long> cinemaHallIds, java.util.Date date) {
         MovieShowMapper movieShowMapper = new MovieShowMapper(cinemaHallRepository.getAll(),movieRepository.getAll());
         return dslContext.selectFrom(MOVIE_SHOW).where(MOVIE_SHOW.CINEMA_HALL_ID.in(cinemaHallIds)
-                .and(MOVIE_SHOW.SHOW_DATE.eq(new java.sql.Date(date.getTime())))).fetch(movieShowMapper::map);
+                .and(MOVIE_SHOW.SHOW_DATE.contains(new Date(date.getTime())))).fetch(movieShowMapper::map);
     }
 }
