@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Movie extends TableImpl<MovieRecord> {
 
-    private static final long serialVersionUID = 1847633006;
+    private static final long serialVersionUID = -350339487;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie</code>
@@ -75,16 +75,6 @@ public class Movie extends TableImpl<MovieRecord> {
      * The column <code>cinemaDBtest.movie.duration</code>.
      */
     public final TableField<MovieRecord, Integer> DURATION = createField("duration", org.jooq.impl.SQLDataType.INTEGER, this, "");
-
-    /**
-     * The column <code>cinemaDBtest.movie.poster_img_big</code>.
-     */
-    public final TableField<MovieRecord, byte[]> POSTER_IMG_BIG = createField("poster_img_big", org.jooq.impl.SQLDataType.BLOB, this, "");
-
-    /**
-     * The column <code>cinemaDBtest.movie.poster_img_small</code>.
-     */
-    public final TableField<MovieRecord, byte[]> POSTER_IMG_SMALL = createField("poster_img_small", org.jooq.impl.SQLDataType.BLOB, this, "");
 
     /**
      * The column <code>cinemaDBtest.movie.release_date</code>.

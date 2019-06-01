@@ -9,7 +9,6 @@ import com.eoller.cinemadb.cinemadb.generated.tables.CinemaHall;
 import com.eoller.cinemadb.cinemadb.generated.tables.Country;
 import com.eoller.cinemadb.cinemadb.generated.tables.Director;
 import com.eoller.cinemadb.cinemadb.generated.tables.Genre;
-import com.eoller.cinemadb.cinemadb.generated.tables.HibernateSequence;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
@@ -44,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cinemadbtest extends SchemaImpl {
 
-    private static final long serialVersionUID = -600647742;
+    private static final long serialVersionUID = 562525822;
 
     /**
      * The reference instance of <code>cinemaDBtest</code>
@@ -75,11 +74,6 @@ public class Cinemadbtest extends SchemaImpl {
      * The table <code>cinemaDBtest.genre</code>.
      */
     public final Genre GENRE = com.eoller.cinemadb.cinemadb.generated.tables.Genre.GENRE;
-
-    /**
-     * The table <code>cinemaDBtest.hibernate_sequence</code>.
-     */
-    public final HibernateSequence HIBERNATE_SEQUENCE = com.eoller.cinemadb.cinemadb.generated.tables.HibernateSequence.HIBERNATE_SEQUENCE;
 
     /**
      * The table <code>cinemaDBtest.movie</code>.
@@ -156,7 +150,6 @@ public class Cinemadbtest extends SchemaImpl {
             Country.COUNTRY,
             Director.DIRECTOR,
             Genre.GENRE,
-            HibernateSequence.HIBERNATE_SEQUENCE,
             Movie.MOVIE,
             MovieHasGenre.MOVIE_HAS_GENRE,
             MovieShow.MOVIE_SHOW,

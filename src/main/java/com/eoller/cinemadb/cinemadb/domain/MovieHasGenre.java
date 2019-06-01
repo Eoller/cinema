@@ -9,11 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Seat {
+public class MovieHasGenre {
 
-    private Long id;
-    private Integer number;
-    private boolean isVip;
-    private CinemaHall cinemaHall;
+    private long id;
+    private Genre genre;
+    private Movie movie;
 
 }

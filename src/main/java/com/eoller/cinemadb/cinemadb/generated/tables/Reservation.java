@@ -40,7 +40,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Reservation extends TableImpl<ReservationRecord> {
 
-    private static final long serialVersionUID = 1720588848;
+    private static final long serialVersionUID = 180143572;
 
     /**
      * The reference instance of <code>cinemaDBtest.reservation</code>
@@ -63,7 +63,7 @@ public class Reservation extends TableImpl<ReservationRecord> {
     /**
      * The column <code>cinemaDBtest.reservation.payed</code>.
      */
-    public final TableField<ReservationRecord, Boolean> PAYED = createField("payed", org.jooq.impl.SQLDataType.BIT, this, "");
+    public final TableField<ReservationRecord, Byte> PAYED = createField("payed", org.jooq.impl.SQLDataType.TINYINT, this, "");
 
     /**
      * The column <code>cinemaDBtest.reservation.user_id</code>.

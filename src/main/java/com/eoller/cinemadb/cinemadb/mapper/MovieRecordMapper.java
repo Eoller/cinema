@@ -13,8 +13,6 @@ public class MovieRecordMapper {
         movieRecord.setTitlePl(movie.getTitlePl());
         movieRecord.setTitleOriginal(movie.getTitleOriginal());
         movieRecord.setDuration(movie.getDuration());
-        movieRecord.setPosterImgSmall(movie.getPosterImgSmall());
-        movieRecord.setPosterImgBig(movie.getPosterImgBig());
         movieRecord.setDescription(movie.getDescription());
         movieRecord.setDescriptionShort(movie.getDescriptionShort());
         movieRecord.setReleaseDate(new Date(movie.getReleaseDate().getTime()));

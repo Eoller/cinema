@@ -6,7 +6,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.records.SeatRecord;
 public class SeatRecordMapper {
 
     public SeatRecord map(Seat seat){
-        return new SeatRecord(seat.getId(),seat.getIsVip(),seat.getNumber(),seat.getCinemaHall().getId());
+        return new SeatRecord(seat.getId(),seat.isVip(),seat.getNumber(),seat.getCinemaHall().getId());
     }
 
 }

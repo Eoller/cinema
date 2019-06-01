@@ -18,7 +18,6 @@ public class SeatMapper {
     }
 
     public Seat map(SeatRecord seatRecord){
-        return new Seat(seatRecord.getId(),seatRecord.getNumber(),seatRecord.getIsVip(),
-                cinemaHallMap.get(seatRecord.getCinemaHallId()));
+        return new Seat(seatRecord.getId(),seatRecord.getNumber(),seatRecord.getIsVip(), cinemaHallMap.get(seatRecord.getCinemaHallId()));
     }
 }
