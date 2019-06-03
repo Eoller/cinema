@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Genre extends TableImpl<GenreRecord> {
 
-    private static final long serialVersionUID = 781955057;
+    private static final long serialVersionUID = -104465299;
 
     /**
      * The reference instance of <code>cinemaDBtest.genre</code>
@@ -58,7 +59,7 @@ public class Genre extends TableImpl<GenreRecord> {
     /**
      * The column <code>cinemaDBtest.genre.id</code>.
      */
-    public final TableField<GenreRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<GenreRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.genre.genre_name</code>.
@@ -112,6 +113,14 @@ public class Genre extends TableImpl<GenreRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.GENRE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<GenreRecord, Long> getIdentity() {
+        return Keys.IDENTITY_GENRE;
     }
 
     /**

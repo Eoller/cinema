@@ -1,6 +1,5 @@
 package com.eoller.cinemadb.cinemadb.mapper;
 
-import com.eoller.cinemadb.cinemadb.domain.Cinema;
 import com.eoller.cinemadb.cinemadb.domain.CinemaHall;
 import com.eoller.cinemadb.cinemadb.domain.Seat;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.SeatRecord;

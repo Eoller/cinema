@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Seat extends TableImpl<SeatRecord> {
 
-    private static final long serialVersionUID = 646164890;
+    private static final long serialVersionUID = 122014898;
 
     /**
      * The reference instance of <code>cinemaDBtest.seat</code>
@@ -58,7 +59,7 @@ public class Seat extends TableImpl<SeatRecord> {
     /**
      * The column <code>cinemaDBtest.seat.id</code>.
      */
-    public final TableField<SeatRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<SeatRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.seat.is_vip</code>.
@@ -122,6 +123,14 @@ public class Seat extends TableImpl<SeatRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.SEAT_FKSO5YP5WLPKCVS31LOJ6YBVCLT, Indexes.SEAT_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<SeatRecord, Long> getIdentity() {
+        return Keys.IDENTITY_SEAT;
     }
 
     /**

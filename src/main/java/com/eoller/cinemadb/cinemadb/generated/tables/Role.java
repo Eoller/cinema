@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Role extends TableImpl<RoleRecord> {
 
-    private static final long serialVersionUID = 351509736;
+    private static final long serialVersionUID = -1563769664;
 
     /**
      * The reference instance of <code>cinemaDBtest.role</code>
@@ -58,7 +59,7 @@ public class Role extends TableImpl<RoleRecord> {
     /**
      * The column <code>cinemaDBtest.role.id</code>.
      */
-    public final TableField<RoleRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<RoleRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.role.name</code>.
@@ -112,6 +113,14 @@ public class Role extends TableImpl<RoleRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.ROLE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<RoleRecord, Long> getIdentity() {
+        return Keys.IDENTITY_ROLE;
     }
 
     /**

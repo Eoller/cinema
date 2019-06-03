@@ -1,17 +1,18 @@
 package com.eoller.cinemadb.cinemadb.repository;
 
 import com.eoller.cinemadb.cinemadb.domain.Seat;
-import com.eoller.cinemadb.cinemadb.generated.tables.records.SeatRecord;
 import com.eoller.cinemadb.cinemadb.mapper.SeatMapper;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static com.eoller.cinemadb.cinemadb.generated.tables.Seat.SEAT;
 
 @Repository
+@Transactional
 public class SeatRepository {
 
     @Autowired

@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cinema extends TableImpl<CinemaRecord> {
 
-    private static final long serialVersionUID = -845107092;
+    private static final long serialVersionUID = 850933040;
 
     /**
      * The reference instance of <code>cinemaDBtest.cinema</code>
@@ -58,7 +59,7 @@ public class Cinema extends TableImpl<CinemaRecord> {
     /**
      * The column <code>cinemaDBtest.cinema.id</code>.
      */
-    public final TableField<CinemaRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<CinemaRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.cinema.city</code>.
@@ -117,6 +118,14 @@ public class Cinema extends TableImpl<CinemaRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.CINEMA_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<CinemaRecord, Long> getIdentity() {
+        return Keys.IDENTITY_CINEMA;
     }
 
     /**

@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Reservation extends TableImpl<ReservationRecord> {
 
-    private static final long serialVersionUID = 180143572;
+    private static final long serialVersionUID = -726676170;
 
     /**
      * The reference instance of <code>cinemaDBtest.reservation</code>
@@ -58,12 +59,12 @@ public class Reservation extends TableImpl<ReservationRecord> {
     /**
      * The column <code>cinemaDBtest.reservation.id</code>.
      */
-    public final TableField<ReservationRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<ReservationRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.reservation.payed</code>.
      */
-    public final TableField<ReservationRecord, Byte> PAYED = createField("payed", org.jooq.impl.SQLDataType.TINYINT, this, "");
+    public final TableField<ReservationRecord, Boolean> PAYED = createField("payed", org.jooq.impl.SQLDataType.BIT, this, "");
 
     /**
      * The column <code>cinemaDBtest.reservation.user_id</code>.
@@ -122,6 +123,14 @@ public class Reservation extends TableImpl<ReservationRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG, Indexes.RESERVATION_MV_SH_SEAT_FK_IDX, Indexes.RESERVATION_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<ReservationRecord, Long> getIdentity() {
+        return Keys.IDENTITY_RESERVATION;
     }
 
     /**

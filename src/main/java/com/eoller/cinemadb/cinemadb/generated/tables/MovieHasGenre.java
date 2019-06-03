@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MovieHasGenre extends TableImpl<MovieHasGenreRecord> {
 
-    private static final long serialVersionUID = -725213648;
+    private static final long serialVersionUID = 17804544;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie_has_genre</code>
@@ -58,7 +59,7 @@ public class MovieHasGenre extends TableImpl<MovieHasGenreRecord> {
     /**
      * The column <code>cinemaDBtest.movie_has_genre.id</code>.
      */
-    public final TableField<MovieHasGenreRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<MovieHasGenreRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.movie_has_genre.genre_id</code>.
@@ -117,6 +118,14 @@ public class MovieHasGenre extends TableImpl<MovieHasGenreRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.MOVIE_HAS_GENRE_FK54YB54R68XVHQJRBTSHXANYKT, Indexes.MOVIE_HAS_GENRE_FKH0G4GW1OTW9TNMIBBO9OUGK68, Indexes.MOVIE_HAS_GENRE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<MovieHasGenreRecord, Long> getIdentity() {
+        return Keys.IDENTITY_MOVIE_HAS_GENRE;
     }
 
     /**

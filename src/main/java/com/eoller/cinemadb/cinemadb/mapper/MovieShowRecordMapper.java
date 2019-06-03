@@ -10,7 +10,7 @@ public class MovieShowRecordMapper {
 
     public MovieShowRecord map(MovieShow movieShow){
         return new MovieShowRecord(movieShow.getId(),new Date(movieShow.getShowDate().getTime()),
-                movieShow.getShowTime(),movieShow.getCinemaHall().getId(),movieShow.getMovie().getId());
+                movieShow.getShowTime(),movieShow.getCinemaHall().getId(),movieShow.getMovie().getId(),movieShow.getPrice());
     }
 
 }

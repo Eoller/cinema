@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends TableImpl<UserRecord> {
 
-    private static final long serialVersionUID = -709821267;
+    private static final long serialVersionUID = -296843929;
 
     /**
      * The reference instance of <code>cinemaDBtest.user</code>
@@ -58,7 +59,7 @@ public class User extends TableImpl<UserRecord> {
     /**
      * The column <code>cinemaDBtest.user.id</code>.
      */
-    public final TableField<UserRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<UserRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.user.email</code>.
@@ -142,6 +143,14 @@ public class User extends TableImpl<UserRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.USER_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<UserRecord, Long> getIdentity() {
+        return Keys.IDENTITY_USER;
     }
 
     /**

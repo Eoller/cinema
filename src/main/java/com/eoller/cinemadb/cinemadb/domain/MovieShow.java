@@ -18,5 +18,6 @@ public class MovieShow {
     private Time showTime;
     private Movie movie;
     private CinemaHall cinemaHall;
+    private Integer price;
 
 }

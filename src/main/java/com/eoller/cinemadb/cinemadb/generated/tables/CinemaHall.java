@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class CinemaHall extends TableImpl<CinemaHallRecord> {
 
-    private static final long serialVersionUID = 969535561;
+    private static final long serialVersionUID = 596417810;
 
     /**
      * The reference instance of <code>cinemaDBtest.cinema_hall</code>
@@ -58,7 +59,7 @@ public class CinemaHall extends TableImpl<CinemaHallRecord> {
     /**
      * The column <code>cinemaDBtest.cinema_hall.id</code>.
      */
-    public final TableField<CinemaHallRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<CinemaHallRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.cinema_hall.hall_number</code>.
@@ -117,6 +118,14 @@ public class CinemaHall extends TableImpl<CinemaHallRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.CINEMA_HALL_FKO0VKU6P3NMP2TXOFWWYLS44JQ, Indexes.CINEMA_HALL_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<CinemaHallRecord, Long> getIdentity() {
+        return Keys.IDENTITY_CINEMA_HALL;
     }
 
     /**

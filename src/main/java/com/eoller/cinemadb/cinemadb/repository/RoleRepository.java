@@ -5,12 +5,14 @@ import com.eoller.cinemadb.cinemadb.mapper.RoleMapper;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static com.eoller.cinemadb.cinemadb.generated.tables.Role.ROLE;
 
 @Repository
+@Transactional
 public class RoleRepository {
 
     @Autowired

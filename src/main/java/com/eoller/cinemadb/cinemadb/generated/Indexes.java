@@ -13,6 +13,7 @@ import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
+import com.eoller.cinemadb.cinemadb.generated.tables.MovieTrailer;
 import com.eoller.cinemadb.cinemadb.generated.tables.Reservation;
 import com.eoller.cinemadb.cinemadb.generated.tables.Role;
 import com.eoller.cinemadb.cinemadb.generated.tables.Seat;
@@ -61,6 +62,7 @@ public class Indexes {
     public static final Index MOVIE_SHOW_SEAT_MOVIE_SHOW_FK_IDX = Indexes0.MOVIE_SHOW_SEAT_MOVIE_SHOW_FK_IDX;
     public static final Index MOVIE_SHOW_SEAT_PRIMARY = Indexes0.MOVIE_SHOW_SEAT_PRIMARY;
     public static final Index MOVIE_SHOW_SEAT_SEAT_ID_FK_IDX = Indexes0.MOVIE_SHOW_SEAT_SEAT_ID_FK_IDX;
+    public static final Index MOVIE_TRAILER_PRIMARY = Indexes0.MOVIE_TRAILER_PRIMARY;
     public static final Index RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG = Indexes0.RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG;
     public static final Index RESERVATION_MV_SH_SEAT_FK_IDX = Indexes0.RESERVATION_MV_SH_SEAT_FK_IDX;
     public static final Index RESERVATION_PRIMARY = Indexes0.RESERVATION_PRIMARY;
@@ -95,6 +97,7 @@ public class Indexes {
         public static Index MOVIE_SHOW_SEAT_MOVIE_SHOW_FK_IDX = Internal.createIndex("Movie_show_fk_idx", MovieShowSeat.MOVIE_SHOW_SEAT, new OrderField[] { MovieShowSeat.MOVIE_SHOW_SEAT.MOVIE_SHOW_ID }, false);
         public static Index MOVIE_SHOW_SEAT_PRIMARY = Internal.createIndex("PRIMARY", MovieShowSeat.MOVIE_SHOW_SEAT, new OrderField[] { MovieShowSeat.MOVIE_SHOW_SEAT.ID }, true);
         public static Index MOVIE_SHOW_SEAT_SEAT_ID_FK_IDX = Internal.createIndex("seat_id_fk_idx", MovieShowSeat.MOVIE_SHOW_SEAT, new OrderField[] { MovieShowSeat.MOVIE_SHOW_SEAT.SEAT_ID }, false);
+        public static Index MOVIE_TRAILER_PRIMARY = Internal.createIndex("PRIMARY", MovieTrailer.MOVIE_TRAILER, new OrderField[] { MovieTrailer.MOVIE_TRAILER.ID }, true);
         public static Index RESERVATION_FKM4OIMK0L1757O9PWAVORJ6LJG = Internal.createIndex("FKm4oimk0l1757o9pwavorj6ljg", Reservation.RESERVATION, new OrderField[] { Reservation.RESERVATION.USER_ID }, false);
         public static Index RESERVATION_MV_SH_SEAT_FK_IDX = Internal.createIndex("mv_sh_seat_fk_idx", Reservation.RESERVATION, new OrderField[] { Reservation.RESERVATION.MOVIE_SHW_SEAT_ID }, false);
         public static Index RESERVATION_PRIMARY = Internal.createIndex("PRIMARY", Reservation.RESERVATION, new OrderField[] { Reservation.RESERVATION.ID }, true);

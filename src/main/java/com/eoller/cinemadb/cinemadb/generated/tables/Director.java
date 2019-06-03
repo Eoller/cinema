@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Director extends TableImpl<DirectorRecord> {
 
-    private static final long serialVersionUID = 2040442492;
+    private static final long serialVersionUID = 926470012;
 
     /**
      * The reference instance of <code>cinemaDBtest.director</code>
@@ -58,7 +59,7 @@ public class Director extends TableImpl<DirectorRecord> {
     /**
      * The column <code>cinemaDBtest.director.id</code>.
      */
-    public final TableField<DirectorRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<DirectorRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.director.full_name</code>.
@@ -112,6 +113,14 @@ public class Director extends TableImpl<DirectorRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.DIRECTOR_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<DirectorRecord, Long> getIdentity() {
+        return Keys.IDENTITY_DIRECTOR;
     }
 
     /**

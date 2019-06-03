@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MovieShowSeat extends TableImpl<MovieShowSeatRecord> {
 
-    private static final long serialVersionUID = 366354846;
+    private static final long serialVersionUID = -1952122470;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie_show_seat</code>
@@ -74,7 +74,7 @@ public class MovieShowSeat extends TableImpl<MovieShowSeatRecord> {
     /**
      * The column <code>cinemaDBtest.movie_show_seat.seat_status</code>.
      */
-    public final TableField<MovieShowSeatRecord, Byte> SEAT_STATUS = createField("seat_status", org.jooq.impl.SQLDataType.TINYINT, this, "");
+    public final TableField<MovieShowSeatRecord, Boolean> SEAT_STATUS = createField("seat_status", org.jooq.impl.SQLDataType.BIT, this, "");
 
     /**
      * Create a <code>cinemaDBtest.movie_show_seat</code> table reference

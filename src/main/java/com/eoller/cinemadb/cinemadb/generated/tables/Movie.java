@@ -17,6 +17,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -41,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Movie extends TableImpl<MovieRecord> {
 
-    private static final long serialVersionUID = -350339487;
+    private static final long serialVersionUID = -808480065;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie</code>
@@ -59,7 +60,7 @@ public class Movie extends TableImpl<MovieRecord> {
     /**
      * The column <code>cinemaDBtest.movie.id</code>.
      */
-    public final TableField<MovieRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<MovieRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.movie.description</code>.
@@ -153,6 +154,14 @@ public class Movie extends TableImpl<MovieRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.MOVIE_FK5H5HKYXPRVSGPQG69NQSQ5P48, Indexes.MOVIE_FKBI47W3CNSFI30GC1NU2AVGRA2, Indexes.MOVIE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<MovieRecord, Long> getIdentity() {
+        return Keys.IDENTITY_MOVIE;
     }
 
     /**

@@ -16,6 +16,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -40,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Country extends TableImpl<CountryRecord> {
 
-    private static final long serialVersionUID = -1974356591;
+    private static final long serialVersionUID = 503899303;
 
     /**
      * The reference instance of <code>cinemaDBtest.country</code>
@@ -58,7 +59,7 @@ public class Country extends TableImpl<CountryRecord> {
     /**
      * The column <code>cinemaDBtest.country.id</code>.
      */
-    public final TableField<CountryRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<CountryRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.country.country_name</code>.
@@ -112,6 +113,14 @@ public class Country extends TableImpl<CountryRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.COUNTRY_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<CountryRecord, Long> getIdentity() {
+        return Keys.IDENTITY_COUNTRY;
     }
 
     /**

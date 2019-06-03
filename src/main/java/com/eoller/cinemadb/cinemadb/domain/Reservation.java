@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Reservation {
 
     private long id;
-    private int payed;
+    private boolean payed;
     private User user;
     private MovieShowSeat movieShowSeat;
 

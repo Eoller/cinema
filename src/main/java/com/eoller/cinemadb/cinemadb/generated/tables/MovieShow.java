@@ -18,6 +18,7 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
@@ -42,7 +43,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class MovieShow extends TableImpl<MovieShowRecord> {
 
-    private static final long serialVersionUID = -292722421;
+    private static final long serialVersionUID = 2076305921;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie_show</code>
@@ -60,7 +61,7 @@ public class MovieShow extends TableImpl<MovieShowRecord> {
     /**
      * The column <code>cinemaDBtest.movie_show.id</code>.
      */
-    public final TableField<MovieShowRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
+    public final TableField<MovieShowRecord, Long> ID = createField("id", org.jooq.impl.SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>cinemaDBtest.movie_show.show_date</code>.
@@ -81,6 +82,11 @@ public class MovieShow extends TableImpl<MovieShowRecord> {
      * The column <code>cinemaDBtest.movie_show.movie_id</code>.
      */
     public final TableField<MovieShowRecord, Long> MOVIE_ID = createField("movie_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
+
+    /**
+     * The column <code>cinemaDBtest.movie_show.price</code>.
+     */
+    public final TableField<MovieShowRecord, Integer> PRICE = createField("price", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
      * Create a <code>cinemaDBtest.movie_show</code> table reference
@@ -129,6 +135,14 @@ public class MovieShow extends TableImpl<MovieShowRecord> {
     @Override
     public List<Index> getIndexes() {
         return Arrays.<Index>asList(Indexes.MOVIE_SHOW_FK2RLSEY999V8UO9G081NQ1W1X3, Indexes.MOVIE_SHOW_FKSP1JOEJD7RLQF48CG5NFF615P, Indexes.MOVIE_SHOW_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Identity<MovieShowRecord, Long> getIdentity() {
+        return Keys.IDENTITY_MOVIE_SHOW;
     }
 
     /**

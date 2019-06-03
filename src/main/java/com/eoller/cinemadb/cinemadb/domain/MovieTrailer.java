@@ -1,6 +1,5 @@
 package com.eoller.cinemadb.cinemadb.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,11 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MovieShowSeat {
+public class MovieTrailer {
 
-    private Long id;
-    private Seat seat;
-    private MovieShow movieShow;
-    private boolean seatStatus;
+    private long id;
+    private Movie cinema;
+    private String trailerUrl;
 
 }
