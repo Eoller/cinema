@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Movie extends TableImpl<MovieRecord> {
 
-    private static final long serialVersionUID = -808480065;
+    private static final long serialVersionUID = 1540685856;
 
     /**
      * The reference instance of <code>cinemaDBtest.movie</code>
@@ -108,6 +108,11 @@ public class Movie extends TableImpl<MovieRecord> {
     public final TableField<MovieRecord, Long> DIRECTOR_ID = createField("director_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
+     * The column <code>cinemaDBtest.movie.genre_id</code>.
+     */
+    public final TableField<MovieRecord, Long> GENRE_ID = createField("genre_id", org.jooq.impl.SQLDataType.BIGINT, this, "");
+
+    /**
      * Create a <code>cinemaDBtest.movie</code> table reference
      */
     public Movie() {
@@ -153,7 +158,7 @@ public class Movie extends TableImpl<MovieRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.MOVIE_FK5H5HKYXPRVSGPQG69NQSQ5P48, Indexes.MOVIE_FKBI47W3CNSFI30GC1NU2AVGRA2, Indexes.MOVIE_PRIMARY);
+        return Arrays.<Index>asList(Indexes.MOVIE_FK5H5HKYXPRVSGPQG69NQSQ5P48, Indexes.MOVIE_FKBI47W3CNSFI30GC1NU2AVGRA2, Indexes.MOVIE_GENRE_FK_IDX, Indexes.MOVIE_PRIMARY);
     }
 
     /**
@@ -178,6 +183,18 @@ public class Movie extends TableImpl<MovieRecord> {
     @Override
     public List<UniqueKey<MovieRecord>> getKeys() {
         return Arrays.<UniqueKey<MovieRecord>>asList(Keys.KEY_MOVIE_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<MovieRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<MovieRecord, ?>>asList(Keys.GENRE_FK);
+    }
+
+    public Genre genre() {
+        return new Genre(this, Keys.GENRE_FK);
     }
 
     /**

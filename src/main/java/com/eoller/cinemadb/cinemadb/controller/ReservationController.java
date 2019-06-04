@@ -34,6 +34,11 @@ public class ReservationController {
     @Autowired
     private EmailSendService emailSendService;
 
+    @GetMapping("/reservations")
+    public ResponseEntity getAllReservation(){
+        return new ResponseEntity(reservationRepository.getAll(), HttpStatus.OK);
+    }
+
     @GetMapping("/reservation")
     public ResponseEntity getAllUserReservation(Principal principal) {
         Optional<User> byUsername = userRepository.getByUsername(principal.getName());
@@ -43,10 +48,6 @@ public class ReservationController {
         return new ResponseEntity(reservationRepository.getByUserId(byUsername.get().getId()), HttpStatus.OK);
     }
 
-    @PostMapping("/reservation")
-    public ResponseEntity insert(@RequestBody Reservation reservation) {
-        return new ResponseEntity(reservationRepository.insert(reservation), HttpStatus.OK);
-    }
 
     @DeleteMapping("/reservation/{reservationId}")
     public void removeById(@PathVariable long reservationId) {

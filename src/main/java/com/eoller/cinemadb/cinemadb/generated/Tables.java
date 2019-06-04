@@ -10,7 +10,6 @@ import com.eoller.cinemadb.cinemadb.generated.tables.Country;
 import com.eoller.cinemadb.cinemadb.generated.tables.Director;
 import com.eoller.cinemadb.cinemadb.generated.tables.Genre;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
-import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieTrailer;
@@ -65,11 +64,6 @@ public class Tables {
      * The table <code>cinemaDBtest.movie</code>.
      */
     public static final Movie MOVIE = com.eoller.cinemadb.cinemadb.generated.tables.Movie.MOVIE;
-
-    /**
-     * The table <code>cinemaDBtest.movie_has_genre</code>.
-     */
-    public static final MovieHasGenre MOVIE_HAS_GENRE = com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre.MOVIE_HAS_GENRE;
 
     /**
      * The table <code>cinemaDBtest.movie_show</code>.

@@ -41,4 +41,9 @@ public class ReservationRepository {
     public void removeById(long reservationId) {
         dslContext.deleteFrom(RESERVATION).where(RESERVATION.ID.eq(reservationId)).execute();
     }
+
+    public List<Reservation> getAll() {
+        ReservationMapper mapper = new ReservationMapper(userRepository.getAll(),movieShowSeatRepository.getAll());
+        return dslContext.selectFrom(RESERVATION).fetch(mapper::map);
+    }
 }

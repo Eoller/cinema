@@ -19,6 +19,7 @@ public class MovieRecordMapper {
         movieRecord.setReleaseDatePl(new Date(movie.getReleaseDatePl().getTime()));
         movieRecord.setCountryId(movie.getCountry().getId());
         movieRecord.setDirectorId(movie.getDirector().getId());
+        movieRecord.setGenreId(movie.getGenre().getId());
         return movieRecord;
     }
 }

@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class MovieShowController {
@@ -32,5 +34,16 @@ public class MovieShowController {
     public void removeById(@PathVariable long movieshowId){
         movieShowRepository.removeById(movieshowId);
     }
+
+    @GetMapping("/movieshows")
+    public ResponseEntity getByMovieIdAndCinemaId(@RequestParam(value = "cinemaId",required = true) Long cinemaId, @RequestParam(required = false,name = "movieId") Long movieId){
+        List<MovieShow> showsByCinemaId = movieShowRepository.getByCinemaId(cinemaId);
+        if(movieId == null){
+            return new ResponseEntity(showsByCinemaId, HttpStatus.OK);
+        }
+        List<MovieShow> collect = showsByCinemaId.stream().filter(movieShow -> movieShow.getMovie().getId() == movieId).collect(Collectors.toList());
+        return new ResponseEntity(collect, HttpStatus.OK);
+    }
+
 
 }

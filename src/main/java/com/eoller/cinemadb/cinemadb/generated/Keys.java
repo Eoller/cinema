@@ -10,7 +10,6 @@ import com.eoller.cinemadb.cinemadb.generated.tables.Country;
 import com.eoller.cinemadb.cinemadb.generated.tables.Director;
 import com.eoller.cinemadb.cinemadb.generated.tables.Genre;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
-import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieTrailer;
@@ -24,7 +23,6 @@ import com.eoller.cinemadb.cinemadb.generated.tables.records.CinemaRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.CountryRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.DirectorRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.GenreRecord;
-import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieHasGenreRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieShowRecord;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.MovieShowSeatRecord;
@@ -67,7 +65,6 @@ public class Keys {
     public static final Identity<DirectorRecord, Long> IDENTITY_DIRECTOR = Identities0.IDENTITY_DIRECTOR;
     public static final Identity<GenreRecord, Long> IDENTITY_GENRE = Identities0.IDENTITY_GENRE;
     public static final Identity<MovieRecord, Long> IDENTITY_MOVIE = Identities0.IDENTITY_MOVIE;
-    public static final Identity<MovieHasGenreRecord, Long> IDENTITY_MOVIE_HAS_GENRE = Identities0.IDENTITY_MOVIE_HAS_GENRE;
     public static final Identity<MovieShowRecord, Long> IDENTITY_MOVIE_SHOW = Identities0.IDENTITY_MOVIE_SHOW;
     public static final Identity<MovieShowSeatRecord, Long> IDENTITY_MOVIE_SHOW_SEAT = Identities0.IDENTITY_MOVIE_SHOW_SEAT;
     public static final Identity<MovieTrailerRecord, Long> IDENTITY_MOVIE_TRAILER = Identities0.IDENTITY_MOVIE_TRAILER;
@@ -87,7 +84,6 @@ public class Keys {
     public static final UniqueKey<DirectorRecord> KEY_DIRECTOR_PRIMARY = UniqueKeys0.KEY_DIRECTOR_PRIMARY;
     public static final UniqueKey<GenreRecord> KEY_GENRE_PRIMARY = UniqueKeys0.KEY_GENRE_PRIMARY;
     public static final UniqueKey<MovieRecord> KEY_MOVIE_PRIMARY = UniqueKeys0.KEY_MOVIE_PRIMARY;
-    public static final UniqueKey<MovieHasGenreRecord> KEY_MOVIE_HAS_GENRE_PRIMARY = UniqueKeys0.KEY_MOVIE_HAS_GENRE_PRIMARY;
     public static final UniqueKey<MovieShowRecord> KEY_MOVIE_SHOW_PRIMARY = UniqueKeys0.KEY_MOVIE_SHOW_PRIMARY;
     public static final UniqueKey<MovieShowSeatRecord> KEY_MOVIE_SHOW_SEAT_PRIMARY = UniqueKeys0.KEY_MOVIE_SHOW_SEAT_PRIMARY;
     public static final UniqueKey<MovieTrailerRecord> KEY_MOVIE_TRAILER_PRIMARY = UniqueKeys0.KEY_MOVIE_TRAILER_PRIMARY;
@@ -101,6 +97,7 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<MovieRecord, GenreRecord> GENRE_FK = ForeignKeys0.GENRE_FK;
     public static final ForeignKey<MovieShowSeatRecord, MovieShowRecord> MOVIE_SHOW_FK = ForeignKeys0.MOVIE_SHOW_FK;
     public static final ForeignKey<MovieShowSeatRecord, SeatRecord> SEAT_ID_FK = ForeignKeys0.SEAT_ID_FK;
     public static final ForeignKey<MovieTrailerRecord, MovieRecord> TRAILER_FK = ForeignKeys0.TRAILER_FK;
@@ -117,7 +114,6 @@ public class Keys {
         public static Identity<DirectorRecord, Long> IDENTITY_DIRECTOR = Internal.createIdentity(Director.DIRECTOR, Director.DIRECTOR.ID);
         public static Identity<GenreRecord, Long> IDENTITY_GENRE = Internal.createIdentity(Genre.GENRE, Genre.GENRE.ID);
         public static Identity<MovieRecord, Long> IDENTITY_MOVIE = Internal.createIdentity(Movie.MOVIE, Movie.MOVIE.ID);
-        public static Identity<MovieHasGenreRecord, Long> IDENTITY_MOVIE_HAS_GENRE = Internal.createIdentity(MovieHasGenre.MOVIE_HAS_GENRE, MovieHasGenre.MOVIE_HAS_GENRE.ID);
         public static Identity<MovieShowRecord, Long> IDENTITY_MOVIE_SHOW = Internal.createIdentity(MovieShow.MOVIE_SHOW, MovieShow.MOVIE_SHOW.ID);
         public static Identity<MovieShowSeatRecord, Long> IDENTITY_MOVIE_SHOW_SEAT = Internal.createIdentity(MovieShowSeat.MOVIE_SHOW_SEAT, MovieShowSeat.MOVIE_SHOW_SEAT.ID);
         public static Identity<MovieTrailerRecord, Long> IDENTITY_MOVIE_TRAILER = Internal.createIdentity(MovieTrailer.MOVIE_TRAILER, MovieTrailer.MOVIE_TRAILER.ID);
@@ -135,7 +131,6 @@ public class Keys {
         public static final UniqueKey<DirectorRecord> KEY_DIRECTOR_PRIMARY = Internal.createUniqueKey(Director.DIRECTOR, "KEY_director_PRIMARY", Director.DIRECTOR.ID);
         public static final UniqueKey<GenreRecord> KEY_GENRE_PRIMARY = Internal.createUniqueKey(Genre.GENRE, "KEY_genre_PRIMARY", Genre.GENRE.ID);
         public static final UniqueKey<MovieRecord> KEY_MOVIE_PRIMARY = Internal.createUniqueKey(Movie.MOVIE, "KEY_movie_PRIMARY", Movie.MOVIE.ID);
-        public static final UniqueKey<MovieHasGenreRecord> KEY_MOVIE_HAS_GENRE_PRIMARY = Internal.createUniqueKey(MovieHasGenre.MOVIE_HAS_GENRE, "KEY_movie_has_genre_PRIMARY", MovieHasGenre.MOVIE_HAS_GENRE.ID);
         public static final UniqueKey<MovieShowRecord> KEY_MOVIE_SHOW_PRIMARY = Internal.createUniqueKey(MovieShow.MOVIE_SHOW, "KEY_movie_show_PRIMARY", MovieShow.MOVIE_SHOW.ID);
         public static final UniqueKey<MovieShowSeatRecord> KEY_MOVIE_SHOW_SEAT_PRIMARY = Internal.createUniqueKey(MovieShowSeat.MOVIE_SHOW_SEAT, "KEY_movie_show_seat_PRIMARY", MovieShowSeat.MOVIE_SHOW_SEAT.ID);
         public static final UniqueKey<MovieTrailerRecord> KEY_MOVIE_TRAILER_PRIMARY = Internal.createUniqueKey(MovieTrailer.MOVIE_TRAILER, "KEY_movie_trailer_PRIMARY", MovieTrailer.MOVIE_TRAILER.ID);
@@ -147,6 +142,7 @@ public class Keys {
     }
 
     private static class ForeignKeys0 {
+        public static final ForeignKey<MovieRecord, GenreRecord> GENRE_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_GENRE_PRIMARY, Movie.MOVIE, "genre_fk", Movie.MOVIE.GENRE_ID);
         public static final ForeignKey<MovieShowSeatRecord, MovieShowRecord> MOVIE_SHOW_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_MOVIE_SHOW_PRIMARY, MovieShowSeat.MOVIE_SHOW_SEAT, "Movie_show_fk", MovieShowSeat.MOVIE_SHOW_SEAT.MOVIE_SHOW_ID);
         public static final ForeignKey<MovieShowSeatRecord, SeatRecord> SEAT_ID_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_SEAT_PRIMARY, MovieShowSeat.MOVIE_SHOW_SEAT, "seat_id_fk", MovieShowSeat.MOVIE_SHOW_SEAT.SEAT_ID);
         public static final ForeignKey<MovieTrailerRecord, MovieRecord> TRAILER_FK = Internal.createForeignKey(com.eoller.cinemadb.cinemadb.generated.Keys.KEY_MOVIE_PRIMARY, MovieTrailer.MOVIE_TRAILER, "trailer_fk", MovieTrailer.MOVIE_TRAILER.ID);

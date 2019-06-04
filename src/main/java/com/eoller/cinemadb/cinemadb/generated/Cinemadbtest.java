@@ -10,7 +10,6 @@ import com.eoller.cinemadb.cinemadb.generated.tables.Country;
 import com.eoller.cinemadb.cinemadb.generated.tables.Director;
 import com.eoller.cinemadb.cinemadb.generated.tables.Genre;
 import com.eoller.cinemadb.cinemadb.generated.tables.Movie;
-import com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShow;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.generated.tables.MovieTrailer;
@@ -44,7 +43,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Cinemadbtest extends SchemaImpl {
 
-    private static final long serialVersionUID = -991947770;
+    private static final long serialVersionUID = -2729716;
 
     /**
      * The reference instance of <code>cinemaDBtest</code>
@@ -80,11 +79,6 @@ public class Cinemadbtest extends SchemaImpl {
      * The table <code>cinemaDBtest.movie</code>.
      */
     public final Movie MOVIE = com.eoller.cinemadb.cinemadb.generated.tables.Movie.MOVIE;
-
-    /**
-     * The table <code>cinemaDBtest.movie_has_genre</code>.
-     */
-    public final MovieHasGenre MOVIE_HAS_GENRE = com.eoller.cinemadb.cinemadb.generated.tables.MovieHasGenre.MOVIE_HAS_GENRE;
 
     /**
      * The table <code>cinemaDBtest.movie_show</code>.
@@ -157,7 +151,6 @@ public class Cinemadbtest extends SchemaImpl {
             Director.DIRECTOR,
             Genre.GENRE,
             Movie.MOVIE,
-            MovieHasGenre.MOVIE_HAS_GENRE,
             MovieShow.MOVIE_SHOW,
             MovieShowSeat.MOVIE_SHOW_SEAT,
             MovieTrailer.MOVIE_TRAILER,

@@ -24,5 +24,6 @@ public class Movie {
     private Date releaseDatePl;
     private Director director;
     private Country country;
+    private Genre genre;
 
 }

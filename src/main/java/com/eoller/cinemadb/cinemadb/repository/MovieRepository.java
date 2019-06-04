@@ -27,18 +27,21 @@ public class MovieRepository {
     @Autowired
     private DirectorRepository directorRepository;
 
+    @Autowired
+    private GenreRepository genreRepository;
+
     public List<Movie> getAll(){
-        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll());
+        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll(),genreRepository.getAll());
         return dslContext.selectFrom(MOVIE).fetch(movieMapper::map);
     }
 
     public Movie getById(long movieId) {
-        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll());
+        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll(),genreRepository.getAll());
         return dslContext.selectFrom(MOVIE).where(MOVIE.ID.eq(movieId)).fetchOne(movieMapper::map);
     }
 
     public List<Movie> getByIds(Set<Long> movieIds) {
-        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll());
+        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll(),genreRepository.getAll());
         return dslContext.selectFrom(MOVIE).where(MOVIE.ID.in(movieIds)).fetch(movieMapper::map);
     }
 
@@ -52,7 +55,7 @@ public class MovieRepository {
 
     public Movie update(Movie movie) {
         MovieRecordMapper mapper = new MovieRecordMapper();
-        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll());
+        MovieMapper movieMapper = new MovieMapper(countryRepository.getAll(),directorRepository.getAll(),genreRepository.getAll());
         dslContext.update(MOVIE).set(mapper.map(movie)).where(MOVIE.ID.eq(movie.getId())).execute();
         return this.getById(movie.getId());
     }
