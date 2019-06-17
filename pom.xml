@@ -137,7 +137,7 @@
                         <driver>com.mysql.cj.jdbc.Driver</driver>
                         <url>jdbc:mysql://localhost:3306/cinemaDBtest?serverTimezone=UTC</url>
                         <user>root</user>
-                        <password>1479</password>
+                        <password>ghjcnjgfhjkm123</password>
                     </jdbc>
 
                     <generator>

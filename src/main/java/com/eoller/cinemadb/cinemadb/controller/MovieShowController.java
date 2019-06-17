@@ -33,6 +33,11 @@ public class MovieShowController {
         return new ResponseEntity(movieShowRepository.insert(movieShow), HttpStatus.OK);
     }
 
+    @GetMapping("/movieshow/{id}")
+    public ResponseEntity getById(@PathVariable long id){
+        return new ResponseEntity(movieShowRepository.getById(id), HttpStatus.OK);
+    }
+
     @DeleteMapping("/movieshow/{movieshowId}")
     public void removeById(@PathVariable long movieshowId){
         movieShowRepository.removeById(movieshowId);
