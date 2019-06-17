@@ -28,9 +28,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/css/**",
             "/js/**",
             "/image/**",
-            "/book/**",
-            "/user/**",
-            "/movieshow/**"
+            "/newuser/**",
+            "/cinema/**",
+            "/movie/**",
+            "/movieshows/**"
     };
 
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
