@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toList;
+
 @RestController
 public class MovieShowController {
 
@@ -46,17 +48,17 @@ public class MovieShowController {
     @GetMapping("/movieshows")
     public ResponseEntity getByMovieIdAndCinemaId(@RequestParam(value = "cinemaId",required = true) Long cinemaId, @RequestParam(required = false,name = "movieId") Long movieId){
         List<MovieShow> showsByCinemaId = movieShowRepository.getByCinemaId(cinemaId);
-        if(movieId == null){
-            return new ResponseEntity(showsByCinemaId, HttpStatus.OK);
-        }
-        List<MovieShow> collect = showsByCinemaId.stream().filter(movieShow -> movieShow.getMovie().getId() == movieId).collect(Collectors.toList());
-        Set<Movie> movies = collect.stream().map(MovieShow::getMovie).collect(Collectors.toSet());
+        Set<Movie> movies = showsByCinemaId.stream().map(MovieShow::getMovie).collect(Collectors.toSet());
         List<MovieMovieShowDto> movieMovieShows = new ArrayList<>();
         movies.forEach(movie -> {
-            List<MovieShow> movieShowList = collect.stream().filter(movie1 -> movie1.getMovie().getId() == movie.getId()).collect(Collectors.toList());
+            List<MovieShow> movieShowList = showsByCinemaId.stream().filter(movie1 -> movie1.getMovie().getId() == movie.getId()).collect(toList());
             MovieMovieShowDto dto = new MovieMovieShowDto(movie, movieShowList);
             movieMovieShows.add(dto);
         });
+        if(movieId != null){
+            return new ResponseEntity(movieMovieShows.stream().filter(movieMovieShowDto ->
+                    movieMovieShowDto.getMovie().getId() == movieId).collect(toList()), HttpStatus.OK);
+        }
         return new ResponseEntity(movieMovieShows, HttpStatus.OK);
     }
 
