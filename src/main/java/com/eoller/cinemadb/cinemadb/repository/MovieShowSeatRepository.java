@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static com.eoller.cinemadb.cinemadb.generated.tables.MovieShowSeat.MOVIE_SHOW_SEAT;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Repository
@@ -46,5 +47,10 @@ public class MovieShowSeatRepository {
         dslContext.update(MOVIE_SHOW_SEAT).set(MOVIE_SHOW_SEAT.SEAT_STATUS, false).where(MOVIE_SHOW_SEAT.ID.in(
                 toUpdate.stream().map(MovieShowSeat::getId).collect(Collectors.toSet())
         )).execute();
+    }
+
+    public void removeByMovieId(Long movieId) {
+        Set<Long> ids = movieShowRepository.getAllByMovieId(movieId).stream().map(MovieShow::getId).collect(Collectors.toSet());
+        dslContext.deleteFrom(MOVIE_SHOW_SEAT).where(MOVIE_SHOW_SEAT.ID.in(ids)).execute();
     }
 }

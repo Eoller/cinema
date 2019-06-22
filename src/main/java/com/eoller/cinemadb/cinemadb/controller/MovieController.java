@@ -4,6 +4,7 @@ import com.eoller.cinemadb.cinemadb.domain.Movie;
 import com.eoller.cinemadb.cinemadb.domain.MovieShow;
 import com.eoller.cinemadb.cinemadb.repository.MovieRepository;
 import com.eoller.cinemadb.cinemadb.repository.MovieShowRepository;
+import com.eoller.cinemadb.cinemadb.repository.MovieShowSeatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,9 @@ public class MovieController {
     private MovieRepository movieRepository;
     @Autowired
     private MovieShowRepository movieShowRepository;
+    @Autowired
+    private MovieShowSeatRepository movieShowSeatRepository;
+
 
     @GetMapping("/movie")
     public ResponseEntity<List<Movie>> getAllMovies(){
@@ -43,6 +47,8 @@ public class MovieController {
 
     @DeleteMapping("/movie/{movieId}")
     public ResponseEntity deleteMovieById(@PathVariable Long movieId){
+        movieShowSeatRepository.removeByMovieId(movieId);
+        movieShowRepository.removeByMovieId(movieId);
         movieRepository.remove(movieId);
         return new ResponseEntity(HttpStatus.OK);
     }

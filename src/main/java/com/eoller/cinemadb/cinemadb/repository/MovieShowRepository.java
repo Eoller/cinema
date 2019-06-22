@@ -78,4 +78,8 @@ public class MovieShowRepository {
                 .stream().map(CinemaHall::getId).collect(toList());
         return dslContext.selectFrom(MOVIE_SHOW).where(MOVIE_SHOW.CINEMA_HALL_ID.in(cinameHallsIds)).fetch(mapper::map);
     }
+
+    public void removeByMovieId(Long movieId) {
+        dslContext.deleteFrom(MOVIE_SHOW).where(MOVIE_SHOW.ID.eq(movieId)).execute();
+    }
 }
