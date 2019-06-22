@@ -38,7 +38,7 @@ public class InitialConfiguration {
     return DataSourceBuilder
       .create()
       .username("root")
-      .password("ghjcnjgfhjkm123")
+      .password("1479")
       .url("jdbc:mysql://localhost:3306/cinemaDBtest?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC")
       .build();
   }

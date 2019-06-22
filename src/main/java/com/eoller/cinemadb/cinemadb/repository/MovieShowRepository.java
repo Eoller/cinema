@@ -80,6 +80,6 @@ public class MovieShowRepository {
     }
 
     public void removeByMovieId(Long movieId) {
-        dslContext.deleteFrom(MOVIE_SHOW).where(MOVIE_SHOW.ID.eq(movieId)).execute();
+        dslContext.deleteFrom(MOVIE_SHOW).where(MOVIE_SHOW.MOVIE_ID.eq(movieId)).execute();
     }
 }
