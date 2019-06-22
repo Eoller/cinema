@@ -2,9 +2,11 @@ package com.eoller.cinemadb.cinemadb.controller;
 
 import com.eoller.cinemadb.cinemadb.domain.Movie;
 import com.eoller.cinemadb.cinemadb.domain.MovieShow;
+import com.eoller.cinemadb.cinemadb.domain.MovieShowSeat;
 import com.eoller.cinemadb.cinemadb.repository.MovieRepository;
 import com.eoller.cinemadb.cinemadb.repository.MovieShowRepository;
 import com.eoller.cinemadb.cinemadb.repository.MovieShowSeatRepository;
+import com.eoller.cinemadb.cinemadb.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,8 @@ public class MovieController {
     private MovieShowRepository movieShowRepository;
     @Autowired
     private MovieShowSeatRepository movieShowSeatRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
 
     @GetMapping("/movie")
@@ -47,6 +51,9 @@ public class MovieController {
 
     @DeleteMapping("/movie/{movieId}")
     public ResponseEntity deleteMovieById(@PathVariable Long movieId){
+        Set<Long> movieShowIds = movieShowRepository.getAllByMovieId(movieId).stream().map(MovieShow::getId).collect(Collectors.toSet());
+        Set<Long> movieShowSeatIds = movieShowSeatRepository.getAllByMovieShowIds(movieShowIds).stream().map(MovieShowSeat::getId).collect(Collectors.toSet());
+        reservationRepository.removeByMovieShowSeatsIds(movieShowSeatIds);
         movieShowSeatRepository.removeByMovieId(movieId);
         movieShowRepository.removeByMovieId(movieId);
         movieRepository.remove(movieId);

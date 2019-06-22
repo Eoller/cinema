@@ -4,12 +4,14 @@ import com.eoller.cinemadb.cinemadb.domain.Reservation;
 import com.eoller.cinemadb.cinemadb.generated.tables.records.ReservationRecord;
 import com.eoller.cinemadb.cinemadb.mapper.ReservationMapper;
 import com.eoller.cinemadb.cinemadb.mapper.ReservationRecordMapper;
+import com.sun.org.apache.regexp.internal.RE;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.eoller.cinemadb.cinemadb.generated.tables.Reservation.RESERVATION;
 
@@ -45,5 +47,9 @@ public class ReservationRepository {
     public List<Reservation> getAll() {
         ReservationMapper mapper = new ReservationMapper(userRepository.getAll(),movieShowSeatRepository.getAll());
         return dslContext.selectFrom(RESERVATION).fetch(mapper::map);
+    }
+
+    public void removeByMovieShowSeatsIds(Set<Long> movieShowSeatIds) {
+        dslContext.deleteFrom(RESERVATION).where(RESERVATION.MOVIE_SHW_SEAT_ID.in(movieShowSeatIds)).execute();
     }
 }

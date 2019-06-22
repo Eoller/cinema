@@ -53,4 +53,11 @@ public class MovieShowSeatRepository {
         Set<Long> ids = movieShowRepository.getAllByMovieId(movieId).stream().map(MovieShow::getId).collect(Collectors.toSet());
         dslContext.deleteFrom(MOVIE_SHOW_SEAT).where(MOVIE_SHOW_SEAT.ID.in(ids)).execute();
     }
+
+    public List<MovieShowSeat> getAllByMovieShowIds(Set<Long> movieShowIds) {
+        List<MovieShow> movieShows = movieShowRepository.getAll();
+        MovieShowSeatMapper movieShowSeatMapper =
+                new MovieShowSeatMapper(seatRepository.getAll(),movieShows);
+        return dslContext.selectFrom(MOVIE_SHOW_SEAT).where(MOVIE_SHOW_SEAT.MOVIE_SHOW_ID.in(movieShowIds)).fetch(movieShowSeatMapper::map);
+    }
 }
