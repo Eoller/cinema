@@ -60,4 +60,8 @@ public class MovieShowSeatRepository {
                 new MovieShowSeatMapper(seatRepository.getAll(),movieShows);
         return dslContext.selectFrom(MOVIE_SHOW_SEAT).where(MOVIE_SHOW_SEAT.MOVIE_SHOW_ID.in(movieShowIds)).fetch(movieShowSeatMapper::map);
     }
+
+    public void removeByMovieShowIds(Set<Long> movieShowIds) {
+        dslContext.deleteFrom(MOVIE_SHOW_SEAT).where(MOVIE_SHOW_SEAT.MOVIE_SHOW_ID.in(movieShowIds)).execute();
+    }
 }

@@ -54,7 +54,7 @@ public class MovieController {
         Set<Long> movieShowIds = movieShowRepository.getAllByMovieId(movieId).stream().map(MovieShow::getId).collect(Collectors.toSet());
         Set<Long> movieShowSeatIds = movieShowSeatRepository.getAllByMovieShowIds(movieShowIds).stream().map(MovieShowSeat::getId).collect(Collectors.toSet());
         reservationRepository.removeByMovieShowSeatsIds(movieShowSeatIds);
-        movieShowSeatRepository.removeByMovieId(movieId);
+        movieShowSeatRepository.removeByMovieShowIds(movieShowIds);
         movieShowRepository.removeByMovieId(movieId);
         movieRepository.remove(movieId);
         return new ResponseEntity(HttpStatus.OK);
