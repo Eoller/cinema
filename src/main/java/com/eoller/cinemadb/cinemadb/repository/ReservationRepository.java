@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static com.eoller.cinemadb.cinemadb.generated.tables.Reservation.RESERVATION;
@@ -51,5 +52,10 @@ public class ReservationRepository {
 
     public void removeByMovieShowSeatsIds(Set<Long> movieShowSeatIds) {
         dslContext.deleteFrom(RESERVATION).where(RESERVATION.MOVIE_SHW_SEAT_ID.in(movieShowSeatIds)).execute();
+    }
+
+    public Optional<Reservation> getById(long reservationId) {
+        ReservationMapper mapper = new ReservationMapper(userRepository.getAll(),movieShowSeatRepository.getAll());
+        return dslContext.selectFrom(RESERVATION).where(RESERVATION.ID.eq(reservationId)).fetchOptional(mapper::map);
     }
 }

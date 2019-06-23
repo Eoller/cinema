@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,13 +51,19 @@ public class ReservationController {
 
 
     @DeleteMapping("/reservation/{reservationId}")
-    public void removeById(@PathVariable long reservationId) {
+    public ResponseEntity removeById(@PathVariable long reservationId) {
+        Optional<Reservation> reservation = reservationRepository.getById(reservationId);
+        if(!reservation.isPresent()){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        movieShowSeatRepository.updateSeatStatus(Arrays.asList(reservation.get().getMovieShowSeat()),true);
         reservationRepository.removeById(reservationId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @PostMapping("/reservations")
     public void makeReservation(@RequestBody List<MovieShowSeat> movieShowSeatList, Principal principal) {
-        movieShowSeatRepository.updateSeatStatus(movieShowSeatList);
+        movieShowSeatRepository.updateSeatStatus(movieShowSeatList, false);
         movieShowSeatList.forEach(movieShowSeat -> {
             Reservation reservation = new Reservation();
             reservation.setId(0);

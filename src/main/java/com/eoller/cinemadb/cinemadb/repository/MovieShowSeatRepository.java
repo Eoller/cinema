@@ -43,8 +43,8 @@ public class MovieShowSeatRepository {
         return dslContext.selectFrom(MOVIE_SHOW_SEAT).fetch(movieShowSeatMapper::map);
     }
 
-    public void updateSeatStatus(List<MovieShowSeat> toUpdate) {
-        dslContext.update(MOVIE_SHOW_SEAT).set(MOVIE_SHOW_SEAT.SEAT_STATUS, false).where(MOVIE_SHOW_SEAT.ID.in(
+    public void updateSeatStatus(List<MovieShowSeat> toUpdate, boolean status) {
+        dslContext.update(MOVIE_SHOW_SEAT).set(MOVIE_SHOW_SEAT.SEAT_STATUS, status).where(MOVIE_SHOW_SEAT.ID.in(
                 toUpdate.stream().map(MovieShowSeat::getId).collect(Collectors.toSet())
         )).execute();
     }
