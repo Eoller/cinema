@@ -72,7 +72,11 @@ public class ReservationController {
             Optional<User> byUsername = userRepository.getByUsername(principal.getName());
             reservation.setUser(byUsername.get());
             reservationRepository.insert(reservation);
-            createAndSendEmail(movieShowSeatList.get(i), reservation, byUsername.get());
+            try {
+                createAndSendEmail(movieShowSeatList.get(i), reservation, byUsername.get());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 
