@@ -64,16 +64,16 @@ public class ReservationController {
     @PostMapping("/reservations")
     public void makeReservation(@RequestBody List<MovieShowSeat> movieShowSeatList, Principal principal) {
         movieShowSeatRepository.updateSeatStatus(movieShowSeatList, false);
-        movieShowSeatList.forEach(movieShowSeat -> {
+        for (int i = 0; i < movieShowSeatList.size(); i++) {
             Reservation reservation = new Reservation();
             reservation.setId(0);
-            reservation.setMovieShowSeat(movieShowSeat);
+            reservation.setMovieShowSeat(movieShowSeatList.get(i));
             reservation.setPayed(true);
             Optional<User> byUsername = userRepository.getByUsername(principal.getName());
             reservation.setUser(byUsername.get());
             reservationRepository.insert(reservation);
-            createAndSendEmail(movieShowSeat, reservation, byUsername.get());
-        });
+            createAndSendEmail(movieShowSeatList.get(i), reservation, byUsername.get());
+        }
     }
 
     private void createAndSendEmail(MovieShowSeat movieShowSeat, Reservation reservation, User user) {
