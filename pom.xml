@@ -8,10 +8,10 @@
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.eoller.cinemadb</groupId>
-    <artifactId>cinemadb</artifactId>
+    <groupId>com.chernenv.cinemabackend</groupId>
+    <artifactId>cinemabackend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cinemadb</name>
+    <name>cinemabackend</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -148,7 +148,7 @@
                             <inputSchema>cinemaDBtest</inputSchema>
                         </database>
                         <target>
-                            <packageName>com.eoller.cinemadb.cinemadb.generated</packageName>
+                            <packageName>com.chernenv.cinemabackend.generated</packageName>
                             <directory>src/main/java</directory>
                         </target>
                     </generator>
